@@ -106,8 +106,6 @@
             transform: translateX(-100%);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
-        /* Persistent Hover Connection Layer Mapping */
         .left-hotspot:hover #sidebarMenu, #sidebarMenu:hover, #sidebarMenu.open-drawer {
             transform: translateX(0);
         }
@@ -119,6 +117,8 @@
     </style>
 </head>
 <body class="bg-clinicalSlate text-slate-800 antialiased flex flex-col min-h-screen relative">
+
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
     <div id="preloader">
         <div class="relative flex flex-col items-center">
@@ -599,10 +599,10 @@
 
                 <div class="lg:col-span-7">
                     <div class="bg-white border border-slate-200 p-2 shadow-xl rounded-2xl group relative overflow-hidden h-[340px]">
-                        <a href="https://maps.google.com/?q=1+Chestnut+Crescent+Marianhill" target="_blank" class="absolute inset-0 z-20 bg-transparent flex flex-col items-center justify-center group-hover:bg-darkNavy/10 transition-colors">
+                        <a href="https://maps.google.com/?q=1+Chestnut+Crescent,+Marianhill" target="_blank" class="absolute inset-0 z-20 bg-transparent flex flex-col items-center justify-center group-hover:bg-darkNavy/10 transition-colors">
                             <span class="bg-darkNavy text-white px-4 py-2 rounded-xl text-xs font-bold opacity-0 group-hover:opacity-100 shadow-xl transition-opacity duration-300 pointer-events-none">📍 Open Live Google Maps Navigation 🗺️</span>
                         </a>
-                        <iframe src="https://maps.google.com/maps?q=1%20Chestnut%20Crescent,%20Marianhill&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" class="w-full h-full rounded-xl z-10 relative"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3459.4316982921504!2d30.8285521!3d-29.8517265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef6fa231267b14d%3A0xad5d3ba2b1e2bdad!2sMarianhill!5e0!3m2!1sen!2sza!4v1717960000000!5m2!1sen!2sza" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" class="w-full h-full rounded-xl z-10 relative"></iframe>
                     </div>
                 </div>
             </section>
@@ -611,17 +611,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:px-24">
             <div class="bg-white border border-slate-200 p-6 shadow-xl rounded-2xl">
                 <h3 class="text-lg font-bold text-darkNavy mb-2">Send a Direct Office Inquiry</h3>
-                <form action="https://formsubmit.co/bookings@olwemihlahealth.co.za" method="POST" class="space-y-4">
-                    <input type="hidden" name="_next" value="https://www.olwemihlahealth.co.za">
-                    
+                <form id="officeInquiryForm" action="https://formsubmit.co/bookings@olwemihlahealth.co.za" method="POST" target="hidden_iframe" onsubmit="triggerFormSuccessNotification('officeInquiryForm')" class="space-y-4">
                     <input type="hidden" name="_template" value="table">
                     <input type="hidden" name="_subject" value="New Website Inquiry Payload Received!">
                     <div class="grid sm:grid-cols-2 gap-4">
-                        <input type="text" name="Patient Name" required placeholder="Your Name" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-medicalNavy">
-                        <input type="tel" name="Phone Number" required placeholder="Contact Number" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-medicalNavy">
+                        <input type="text" name="Patient Name" required placeholder="Your Name" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-medicalNavy bg-white">
+                        <input type="tel" name="Phone Number" required placeholder="Contact Number" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-medicalNavy bg-white">
                     </div>
-                    <textarea name="Patient Message Payload" rows="4" required placeholder="Write your questions here..." class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-medicalNavy"></textarea>
-                    <button type="submit" class="w-full bg-medicalNavy text-white font-semibold py-3 rounded-xl text-sm shadow-md">Send Office Dispatch</button>
+                    <textarea name="Patient Message Payload" rows="4" required placeholder="Write your questions here..." class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-medicalNavy bg-white"></textarea>
+                    <button type="submit" class="w-full bg-medicalNavy hover:bg-darkNavy text-white font-semibold py-3 rounded-xl text-sm shadow-md transition-all">Send Office Dispatch</button>
                 </form>
             </div>
         </div>
@@ -634,21 +632,19 @@
                 <h3 class="text-lg font-bold text-white">Request Appointment Slot</h3>
                 <button onclick="closeBookingModal()" class="text-slate-400 hover:text-white text-xl font-bold">×</button>
             </div>
-            <form action="https://formsubmit.co/bookings@olwemihlahealth.co.za" method="POST" class="p-6 space-y-4">
-                <input type="hidden" name="_next" value="https://www.olwemihlahealth.co.za">
-                
+            <form id="modalBookingForm" action="https://formsubmit.co/bookings@olwemihlahealth.co.za" method="POST" target="hidden_iframe" onsubmit="triggerFormSuccessNotification('modalBookingForm')" class="p-6 space-y-4">
                 <input type="hidden" name="_subject" value="⚠️ High Priority Appointment Slot Request Recieved!">
                 <input type="hidden" name="_template" value="box">
-                <input type="text" name="Full Name" required placeholder="Patient Full Name" class="w-full border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-medicalNavy">
-                <input type="tel" name="Callback Contact" required placeholder="Contact Phone Number" class="w-full border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-medicalNavy">
-                <input type="date" name="Target Appointment Date" required class="w-full border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-medicalNavy">
+                <input type="text" name="Full Name" required placeholder="Patient Full Name" class="w-full border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-medicalNavy bg-white">
+                <input type="tel" name="Callback Contact" required placeholder="Contact Phone Number" class="w-full border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-medicalNavy bg-white">
+                <input type="date" name="Target Appointment Date" required class="w-full border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-medicalNavy bg-white">
                 <button type="submit" class="w-full bg-medicalNavy text-white font-bold py-3 rounded-xl text-sm transition shadow-lg">Confirm Slot Request</button>
             </form>
         </div>
     </div>
 
     <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
-        <a href="tel:0705071168" aria-label="Call Medical Desk Now" class="w-14 h-14 bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 active:scale-90 transform transition-all duration-200 animate-bounce shadow-blue-600/40">
+        <a href="tel:0705071168" aria-label="Call Medical Desk Now" class="w-14 h-14 bg-blue-600 text-white rounded-full shadow-2xl border border-white/10 flex items-center justify-center text-2xl hover:scale-110 active:scale-90 transform transition-all duration-200 animate-bounce shadow-blue-600/40">
             <span class="text-white filter drop-shadow">📞</span>
         </a>
         <button onclick="toggleAIBotWindow()" aria-label="Open Interactive AI Helper" class="w-14 h-14 bg-medicalNavy text-white rounded-full shadow-2xl border border-medicalGold/30 flex items-center justify-center text-xl hover:scale-110 active:scale-90 transition-all duration-200 relative">
@@ -719,7 +715,7 @@
             setTimeout(() => { preloader.style.opacity = '0'; preloader.style.visibility = 'hidden'; }, 2200);
         });
 
-        // Toggle Sidebar Function
+        // Toggle Sidebar Drawer Function
         function toggleSidebar(shouldOpen) {
             const menu = document.getElementById('sidebarMenu');
             if (shouldOpen) {
@@ -771,6 +767,23 @@
                 }
             }
             window.requestAnimationFrame(step);
+        }
+
+        // Form Submission Background Routing and Instant Redirection Popups
+        function triggerFormSuccessNotification(formElementId) {
+            // Instantly clear the modal layer if it was an appointment slot request
+            if(formElementId === 'modalBookingForm') {
+                closeBookingModal();
+            }
+            
+            // Trigger popup feedback notification confirming submission layout parameters
+            setTimeout(() => {
+                alert("Success! Your medical dispatch payload has been sent successfully. Our reception desk has received the secure data log and will contact you shortly.");
+                
+                // Reset the active form elements fields and drop them back to home
+                document.getElementById(formElementId).reset();
+                navigateToTab('home');
+            }, 500);
         }
 
         function navigateToSubService(subviewId) {
