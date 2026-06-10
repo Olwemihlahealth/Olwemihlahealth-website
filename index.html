@@ -106,7 +106,9 @@
             transform: translateX(-100%);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .left-hotspot:hover #sidebarMenu, #sidebarMenu:hover {
+        
+        /* Persistent Hover Connection Layer Mapping */
+        .left-hotspot:hover #sidebarMenu, #sidebarMenu:hover, #sidebarMenu.open-drawer {
             transform: translateX(0);
         }
 
@@ -135,9 +137,12 @@
         <div id="sidebarMenu" class="fixed left-0 top-0 bottom-0 w-80 bg-darkNavy text-white p-6 flex flex-col justify-between shadow-2xl border-r border-slate-800/80 backdrop-blur-xl">
             <div class="mt-20 space-y-8">
                 <div class="border-b border-slate-800 pb-4">
-                    <h3 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                        <span class="text-medicalGold">Olwemihla</span> Navigation
-                    </h3>
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                            <span class="text-medicalGold">Olwemihla</span> Navigation
+                        </h3>
+                        <button onclick="toggleSidebar(false)" class="text-slate-400 hover:text-white text-lg font-bold md:hidden">×</button>
+                    </div>
                     <p class="text-[10px] uppercase tracking-wider text-slate-400 mt-1">Dr Dimba Practice Matrix</p>
                 </div>
 
@@ -148,19 +153,19 @@
                     </button>
                     
                     <div class="space-y-1">
-                        <button onclick="navigateToTab('services'); resetServiceViews();" class="w-full text-left py-2.5 px-4 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/60 hover:text-medicalGold flex items-center justify-between text-medicalGold">
+                        <button onclick="navigateToTab('services'); resetServiceViews(); toggleSidebar(false);" class="w-full text-left py-2.5 px-4 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/60 hover:text-medicalGold flex items-center justify-between text-medicalGold">
                             <span>Our Medical Services</span>
                             <span class="text-[10px] bg-medicalGold/10 text-medicalGold px-2 py-0.5 rounded-full">Active</span>
                         </button>
                         <div class="pl-6 border-l border-slate-800/80 mt-1 space-y-2">
-                            <button onclick="navigateToSubService('general-consultations')" class="w-full text-left text-xs text-slate-400 hover:text-white py-1 block transition-colors">• General Consultations</button>
-                            <button onclick="navigateToSubService('medical-certificates')" class="w-full text-left text-xs text-slate-400 hover:text-white py-1 block transition-colors">• Medical Certificates</button>
-                            <button onclick="navigateToSubService('minor-procedures')" class="w-full text-left text-xs text-slate-300 font-semibold hover:text-medicalGold py-1 block transition-colors flex items-center gap-1.5">
+                            <button onclick="navigateToSubService('general-consultations'); toggleSidebar(false);" class="w-full text-left text-xs text-slate-400 hover:text-white py-1 block transition-colors">• General Consultations</button>
+                            <button onclick="navigateToSubService('medical-certificates'); toggleSidebar(false);" class="w-full text-left text-xs text-slate-400 hover:text-white py-1 block transition-colors">• Medical Certificates</button>
+                            <button onclick="navigateToSubService('minor-procedures'); toggleSidebar(false);" class="w-full text-left text-xs text-slate-300 font-semibold hover:text-medicalGold py-1 block transition-colors flex items-center gap-1.5">
                                 <span class="w-1.5 h-1.5 rounded-full bg-medicalGold"></span> Minor Procedures (Circumcisions)
                             </button>
-                            <button onclick="navigateToSubService('chronic-management')" class="w-full text-left text-xs text-slate-400 hover:text-white py-1 block transition-colors">• Chronic Disease Management</button>
-                            <button onclick="navigateToSubService('wellness-screenings')" class="w-full text-left text-xs text-slate-400 hover:text-white py-1 block transition-colors">• Wellness Screenings</button>
-                            <button onclick="navigateToSubService('patient-education')" class="w-full text-left text-xs text-slate-400 hover:text-white py-1 block transition-colors">• Patient Education</button>
+                            <button onclick="navigateToSubService('chronic-management'); toggleSidebar(false);" class="w-full text-left text-xs text-slate-400 hover:text-white py-1 block transition-colors">• Chronic Disease Management</button>
+                            <button onclick="navigateToSubService('wellness-screenings'); toggleSidebar(false);" class="w-full text-left text-xs text-slate-400 hover:text-white py-1 block transition-colors">• Wellness Screenings</button>
+                            <button onclick="navigateToSubService('patient-education'); toggleSidebar(false);" class="w-full text-left text-xs text-slate-400 hover:text-white py-1 block transition-colors">• Patient Education</button>
                         </div>
                     </div>
 
@@ -183,7 +188,7 @@
 
             <div class="border-t border-slate-800/80 pt-4 text-center">
                 <p class="text-[10px] text-slate-500">Practice Number: Pr No: 1332546</p>
-                <button onclick="openBookingModal()" class="mt-3 w-full bg-medicalGold text-darkNavy font-bold py-2 rounded-lg text-xs hover:bg-white transition-colors shadow-lg">
+                <button onclick="openBookingModal(); toggleSidebar(false);" class="mt-3 w-full bg-medicalGold text-darkNavy font-bold py-2 rounded-lg text-xs hover:bg-white transition-colors shadow-lg">
                     Direct Triage Booking
                 </button>
             </div>
@@ -192,7 +197,7 @@
 
     <div class="bg-darkNavy text-white py-2 px-4 text-xs font-medium border-b border-medicalGold/30 z-30 relative">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 md:pl-16">
                 <span><strong>General Practitioner:</strong> Dr Dimba</span>
                 <span class="text-slate-400">|</span>
                 <span><strong>Pr No:</strong> 1332546</span>
@@ -207,8 +212,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
             
             <div class="flex items-center gap-4">
-                <div class="left-hotspot group py-2">
-                    <button aria-label="Toggle Navigation Menu" class="bg-darkNavy text-white w-11 h-11 rounded-xl shadow-md border border-medicalGold/30 flex flex-col items-center justify-center gap-1.5 transition-all duration-300 hover:bg-medicalNavy">
+                <div class="py-2">
+                    <button onclick="toggleSidebar(true)" aria-label="Toggle Navigation Menu" class="bg-darkNavy text-white w-11 h-11 rounded-xl shadow-md border border-medicalGold/30 flex flex-col items-center justify-center gap-1.5 transition-all duration-300 hover:bg-medicalNavy active:scale-95">
                         <span class="w-5 h-0.5 bg-white rounded"></span>
                         <span class="w-5 h-0.5 bg-medicalGold rounded"></span>
                         <span class="w-5 h-0.5 bg-white rounded"></span>
@@ -246,7 +251,7 @@
         <div id="tab-home" class="tab-content active-tab">
             <section class="relative bg-white pt-12 pb-20 overflow-hidden border-b border-slate-100">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
-                    <div class="lg:col-span-7 z-10">
+                    <div class="lg:col-span-7 z-10 md:pl-16">
                         <span class="inline-flex items-center gap-1.5 bg-medicalGold/10 text-medicalNavy px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-6 animate-reveal">
                             <span class="w-2 h-2 rounded-full bg-medicalGold animate-pulse"></span> Marianhill Community Practice
                         </span>
@@ -279,7 +284,7 @@
                     <h2 class="text-3xl font-bold text-darkNavy">Comprehensive Clinical Pillars</h2>
                     <p class="text-slate-500 mt-2">Professional outpatient general practice procedures built around an optimal patient experience.</p>
                 </div>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:px-16">
                     <div onclick="navigateToSubService('general-consultations')" class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
                         <div class="w-12 h-12 bg-medicalNavy/10 text-medicalNavy rounded-xl flex items-center justify-center mb-5 font-bold group-hover:bg-medicalNavy group-hover:text-white transition-all duration-300">GC</div>
                         <h3 class="text-lg font-bold text-darkNavy group-hover:text-medicalNavy transition-colors">General Consultations</h3>
@@ -305,7 +310,7 @@
                         <h3 class="text-lg font-bold text-darkNavy group-hover:text-medicalNavy transition-colors">Wellness Screenings</h3>
                         <p class="text-slate-500 text-sm mt-2">Proactive diagnostics aimed at isolating health risk factors before symptoms develop.</p>
                     </div>
-                    <div onclick="navigateToSubService('patient-education')" class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                    <div onclick="navigateToSubService('patient-education')" class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group cursor-pointer">
                         <div class="w-12 h-12 bg-medicalNavy/10 text-medicalNavy rounded-xl flex items-center justify-center mb-5 font-bold group-hover:bg-medicalNavy group-hover:text-white transition-all duration-300">PE</div>
                         <h3 class="text-lg font-bold text-darkNavy group-hover:text-medicalNavy transition-colors">Patient Education</h3>
                         <p class="text-slate-500 text-sm mt-2">Dedicated counseling frameworks designed to empower families with practical lifestyle habits knowledge.</p>
@@ -323,7 +328,7 @@
                     </div>
                 </section>
                 
-                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:px-24">
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <div onclick="navigateToSubService('general-consultations')" class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group cursor-pointer">
                             <div class="h-32 bg-darkNavy p-6 flex items-end relative overflow-hidden">
@@ -336,6 +341,7 @@
                                 <span class="text-xs font-bold text-medicalNavy group-hover:text-medicalGold inline-flex items-center gap-1 transition-colors">Expand Operational Details <span>→</span></span>
                             </div>
                         </div>
+
                         <div onclick="navigateToSubService('medical-certificates')" class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group cursor-pointer">
                             <div class="h-32 bg-darkNavy p-6 flex items-end relative overflow-hidden">
                                 <img src="Amahle.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-luminosity group-hover:scale-110 transition-all duration-500">
@@ -347,6 +353,7 @@
                                 <span class="text-xs font-bold text-medicalNavy group-hover:text-medicalGold inline-flex items-center gap-1 transition-colors">Expand Operational Details <span>→</span></span>
                             </div>
                         </div>
+
                         <div onclick="navigateToSubService('minor-procedures')" class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group cursor-pointer ring-2 ring-medicalGold/30">
                             <div class="h-32 bg-darkNavy p-6 flex items-end relative overflow-hidden">
                                 <img src="Amahle.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-luminosity group-hover:scale-110 transition-all duration-500">
@@ -359,6 +366,7 @@
                                 <span class="text-xs font-bold text-medicalNavy group-hover:text-medicalGold inline-flex items-center gap-1 transition-colors">Expand Operational Details <span>→</span></span>
                             </div>
                         </div>
+
                         <div onclick="navigateToSubService('chronic-management')" class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group cursor-pointer">
                             <div class="h-32 bg-darkNavy p-6 flex items-end relative overflow-hidden">
                                 <img src="Amahle.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-luminosity group-hover:scale-110 transition-all duration-500">
@@ -370,6 +378,7 @@
                                 <span class="text-xs font-bold text-medicalNavy group-hover:text-medicalGold inline-flex items-center gap-1 transition-colors">Expand Operational Details <span>→</span></span>
                             </div>
                         </div>
+
                         <div onclick="navigateToSubService('wellness-screenings')" class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group cursor-pointer">
                             <div class="h-32 bg-darkNavy p-6 flex items-end relative overflow-hidden">
                                 <img src="Amahle.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-luminosity group-hover:scale-110 transition-all duration-500">
@@ -381,6 +390,7 @@
                                 <span class="text-xs font-bold text-medicalNavy group-hover:text-medicalGold inline-flex items-center gap-1 transition-colors">Expand Operational Details <span>→</span></span>
                             </div>
                         </div>
+
                         <div onclick="navigateToSubService('patient-education')" class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group cursor-pointer">
                             <div class="h-32 bg-darkNavy p-6 flex items-end relative overflow-hidden">
                                 <img src="Amahle.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-luminosity group-hover:scale-110 transition-all duration-500">
@@ -464,7 +474,7 @@
             </section>
 
             <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:px-24 grid md:grid-cols-12 gap-8">
-                <div class="md:col-span-4 bg-gradient-to-br from-darkNavy to-medicalNavy text-white p-8 rounded-3xl shadow-xl border-b-4 border-medicalGold relative overflow-hidden flex flex-col justify-between">
+                <div class="md:col-span-4 bg-gradient-to-br from-darkNavy to-medicalNavy text-white p-8 rounded-3xl shadow-xl border-b-4 border-medicalGold relative overflow-hidden flex flex-col justify-between min-h-[300px]">
                     <div class="absolute right-0 top-0 w-24 h-24 bg-white/5 rounded-full blur-xl translate-x-4 -translate-y-4"></div>
                     <div>
                         <span class="text-xs uppercase tracking-widest font-bold text-medicalGold">Out-Of-Pocket / Cash</span>
@@ -473,7 +483,10 @@
                     </div>
                     <div class="mt-8">
                         <span class="text-sm text-slate-400 font-medium block">Standard Rate</span>
-                        <span class="text-5xl font-black text-white tracking-tight">R 500</span>
+                        <span class="text-5xl font-black text-white tracking-tight flex items-center">
+                            R&nbsp;<span id="cashRateOdometer">0</span>
+                        </span>
+                        <span class="text-[10px] text-medicalGold font-semibold block mt-1">Settle at Front Desk via Cash/Card</span>
                     </div>
                 </div>
 
@@ -556,6 +569,7 @@
 
         <div id="tab-contact" class="tab-content">
             <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid lg:grid-cols-12 gap-12 md:px-24">
+                
                 <div class="lg:col-span-5 space-y-8">
                     <div>
                         <h1 class="text-3xl font-bold text-darkNavy">Get in Touch</h1>
@@ -585,10 +599,10 @@
 
                 <div class="lg:col-span-7">
                     <div class="bg-white border border-slate-200 p-2 shadow-xl rounded-2xl group relative overflow-hidden h-[340px]">
-                        <a href="https://maps.google.com/?q=1+Chestnut+Crescent,+Marianhill,+South+Africa" target="_blank" class="absolute inset-0 z-20 bg-transparent flex flex-col items-center justify-center group-hover:bg-darkNavy/10 transition-colors">
+                        <a href="https://maps.google.com/?q=1+Chestnut+Crescent+Marianhill" target="_blank" class="absolute inset-0 z-20 bg-transparent flex flex-col items-center justify-center group-hover:bg-darkNavy/10 transition-colors">
                             <span class="bg-darkNavy text-white px-4 py-2 rounded-xl text-xs font-bold opacity-0 group-hover:opacity-100 shadow-xl transition-opacity duration-300 pointer-events-none">📍 Open Live Google Maps Navigation 🗺️</span>
                         </a>
-                        <iframe src="https://maps.google.com/maps?q=1%20Chestnut%20Crescent,%20Marianhill,%20South%20Africa&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" class="w-full h-full rounded-xl z-10 relative"></iframe>
+                        <iframe src="https://maps.google.com/maps?q=1%20Chestnut%20Crescent,%20Marianhill&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" class="w-full h-full rounded-xl z-10 relative"></iframe>
                     </div>
                 </div>
             </section>
@@ -701,9 +715,23 @@
             setTimeout(() => { preloader.style.opacity = '0'; preloader.style.visibility = 'hidden'; }, 2200);
         });
 
+        // Toggle Sidebar Function
+        function toggleSidebar(shouldOpen) {
+            const menu = document.getElementById('sidebarMenu');
+            if (shouldOpen) {
+                menu.classList.add('open-drawer');
+                menu.style.transform = "translateX(0)";
+            } else {
+                menu.classList.remove('open-drawer');
+                menu.style.transform = "translateX(-100%)";
+            }
+        }
+
+        // Global Routing Engine with Odometer Activation Handshake Hooks
         function navigateToTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active-tab'));
+            
             const activeTarget = document.getElementById('tab-' + tabId);
             if(activeTarget) activeTarget.classList.add('active-tab');
             
@@ -714,7 +742,31 @@
             });
             const selectedNavLink = document.getElementById('nav-' + tabId);
             if(selectedNavLink) selectedNavLink.classList.add('text-medicalNavy', 'font-semibold', 'bg-slate-100');
+            
+            // Fire Odometer sequence if user arrives at Rates panel view matrix
+            if (tabId === 'rates') {
+                animateCashOdometer(0, 500, 1200);
+            }
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Incremental Price Count Animation Framework
+        function animateCashOdometer(startValue, endValue, duration) {
+            const targetNode = document.getElementById('cashRateOdometer');
+            if (!targetNode) return;
+            
+            let startTime = null;
+            function step(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                const currentValue = Math.floor(progress * (endValue - startValue) + startValue);
+                targetNode.innerText = currentValue;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            }
+            window.requestAnimationFrame(step);
         }
 
         function navigateToSubService(subviewId) {
@@ -735,7 +787,6 @@
             subviews.forEach(view => view.classList.remove('active-subview'));
         }
 
-        // Modal Controls
         function openBookingModal() {
             const modal = document.getElementById('bookingModal');
             const container = document.getElementById('modalContainer');
