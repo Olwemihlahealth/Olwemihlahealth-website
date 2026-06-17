@@ -739,7 +739,7 @@
             if(selectedNavLink) selectedNavLink.classList.add('text-medicalNavy', 'font-semibold', 'bg-slate-100');
             
             if (tabId === 'rates') {
-                animateCashOdometer(0, 500, 1200);
+                animateCashOdometer(0, 300, 1200);
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -842,7 +842,7 @@
             if(normalizedQuery.includes('hour') || normalizedQuery.includes('time') || normalizedQuery.includes('open')) {
                 aiResponseText = "Dr Dimba's practice is open Monday to Sunday, including public holidays, from 08:00 until 17:00 daily.";
             } else if(normalizedQuery.includes('rate') || normalizedQuery.includes('cash') || normalizedQuery.includes('fee') || normalizedQuery.includes('cost') || normalizedQuery.includes('much')) {
-                aiResponseText = "A standard cash general consultation with Dr Dimba is R 500. Settle via cash or card at the front desk reception.";
+                aiResponseText = "A standard cash general consultation with Dr Dimba is R 300. Settle via cash or card at the front desk reception.";
             } else if(normalizedQuery.includes('circumcision') || normalizedQuery.includes('procedure') || normalizedQuery.includes('minor')) {
                 aiResponseText = "Yes, Dr Dimba performs safe medical circumcisions in our outpatient treatment suite with local anesthetic block applications. Tap 'Book Appointment' to get started.";
             } else if(normalizedQuery.includes('where') || normalizedQuery.includes('address') || normalizedQuery.includes('location')) {
